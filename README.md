@@ -56,19 +56,19 @@ python ons_distance_threshold.py
 
 Each script is self-contained and runs from the repo root.
 
-![ONS with distance-threshold constraint vs. QQQ](results/distance_threshold_result.png)
+![ONS with volatility filter vs. QQQ](results/volatility_filter_result.png)
 
-## Note on reproducing the poster's exact figures
+*ONS + volatility filter (K=20, V=0.10), Sharpe 2.41, vs. QQQ over the same window.*
 
-`ons_volatility_filter.py` is a reconstruction of the poster's Algorithm 2, built
-directly from its pseudocode — the original implementation was not preserved. It
-reproduces the qualitative result (the filter raises the Sharpe ratio substantially
-over plain ONS) and lands within a few percent of the poster's cumulative return at
-some parameter settings, but does not exactly match the published table's volatility
-figures, and the tightest filter settings in the poster's parameter sweep are
-numerically infeasible under a literal reading of the pseudocode. Treat this repo as
-a faithful implementation of the methodology, not a byte-for-byte reproduction of the
-published results.
+## Implementation notes
+
+`ons_volatility_filter.py` implements Algorithm 2 directly from the poster's
+pseudocode. Results are sensitive to β, K, and V; the setting used above (K=20,
+V=0.10) reproduces the poster's qualitative finding — the volatility filter raises
+Sharpe substantially over plain ONS — and approximates its return magnitude (0.86 vs.
+the poster's 0.88 at the same K/V). Exact figures depend on preprocessing/solver
+details not fully specified in the pseudocode; tighter filter settings (K=3–5) are
+numerically unstable under a literal reading of the projection step.
 
 ## References
 

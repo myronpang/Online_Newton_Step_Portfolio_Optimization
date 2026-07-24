@@ -8,6 +8,8 @@ exact numerical reproduction).
 """
 import numpy as np
 import pandas as pd
+import yfinance as yf
+import matplotlib.pyplot as plt
 from cvxopt import matrix, solvers
 
 solvers.options['show_progress'] = False
@@ -94,11 +96,27 @@ if __name__ == "__main__":
             daily.append(float(np.dot(new_p, r)))
             p = new_p
         daily = pd.Series(daily)
-        cum = (1 + daily).cumprod().iloc[-1] - 1
+        cum_series = (1 + daily).cumprod() - 1
         ann_std = daily.std() * np.sqrt(len(daily))
-        return cum, ann_std, cum / ann_std
+        return cum_series, ann_std, cum_series.iloc[-1] / ann_std
 
     print(f"{'K':>4} {'V':>6} | {'cum_return':>10} {'ann_std':>8} {'sharpe':>7}")
     for K, V in [(10, 0.05), (15, 0.07), (20, 0.10)]:
-        cum, std, sharpe = run(K=K, V=V)
-        print(f"{K:>4} {V:>6} | {cum:>10.4f} {std:>8.4f} {sharpe:>7.3f}")
+        cum_series, std, sharpe = run(K=K, V=V)
+        print(f"{K:>4} {V:>6} | {cum_series.iloc[-1]:>10.4f} {std:>8.4f} {sharpe:>7.3f}")
+
+    # headline chart: K=20, V=0.10 -- closest to the poster's own published figure
+    headline_cum, headline_std, headline_sharpe = run(K=20, V=0.10)
+    qqq = yf.download('QQQ', start='2023-03-16', end='2024-03-21', progress=False)['Close']
+    qqq_cum = (qqq.pct_change().fillna(0).reset_index(drop=True) + 1).cumprod() - 1
+
+    plt.figure(figsize=(14, 7))
+    plt.plot(headline_cum.index, headline_cum.values, label=f'ONS + Volatility Filter (K=20, V=0.10, Sharpe={headline_sharpe:.2f})')
+    plt.plot(qqq_cum.index, qqq_cum.values, label='QQQ Benchmark', alpha=0.75)
+    plt.title('Cumulative Returns Comparison')
+    plt.xlabel('Trading day')
+    plt.ylabel('Cumulative Returns')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig('results/volatility_filter_result.png', dpi=120)
+    print("\nsaved plot -> results/volatility_filter_result.png")
