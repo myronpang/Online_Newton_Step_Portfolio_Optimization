@@ -11,7 +11,7 @@ Columbia University research project, Spring 2024, advised by Prof. Eric Balkans
 Presented at the [Columbia Data Science Undergraduate Research Fair 2024](https://datascience.columbia.edu/events/undergraduate-research-fair-2024/) (P14).
 Poster: [`poster.pdf`](poster.pdf).
 
-**Contributors:** Zhengtao Su (team lead), Minhao Pang.
+**Contributors:** Minhao Pang, Zhengtao Su.
 
 ## Method
 
