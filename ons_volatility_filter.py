@@ -111,7 +111,7 @@ if __name__ == "__main__":
     qqq_cum = (qqq.pct_change().fillna(0).reset_index(drop=True) + 1).cumprod() - 1
 
     plt.figure(figsize=(14, 7))
-    plt.plot(headline_cum.index, headline_cum.values, label=f'ONS + Volatility Filter (K=20, V=0.10, Sharpe={headline_sharpe:.2f})')
+    plt.plot(headline_cum.index, headline_cum.values, label='ONS + Volatility Filter (K=20, V=0.10)')
     plt.plot(qqq_cum.index, qqq_cum.values, label='QQQ Benchmark', alpha=0.75)
     plt.title('Cumulative Returns Comparison')
     plt.xlabel('Trading day')

@@ -58,7 +58,7 @@ Each script is self-contained and runs from the repo root.
 
 ![ONS with volatility filter vs. QQQ](results/volatility_filter_result.png)
 
-*ONS + volatility filter (K=20, V=0.10), Sharpe 2.41, vs. QQQ over the same window.*
+*ONS + volatility filter (K=20, V=0.10) vs. QQQ over the same window.*
 
 ## Implementation notes
 
