@@ -1,0 +1,5 @@
+numpy
+pandas
+cvxopt
+yfinance
+matplotlib
