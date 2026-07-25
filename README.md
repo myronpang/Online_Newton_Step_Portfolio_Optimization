@@ -7,7 +7,7 @@ volatility filter and a correlation-distance diversification constraint.
 *Convex optimization (QP) · online/sequential learning · risk-constrained portfolio
 construction · numerical linear algebra.*
 
-Columbia University research project, Spring 2024, advised by Prof. Eric Balkanski.
+Columbia University research project, Spring 2024.
 Presented at the [Columbia Data Science Undergraduate Research Fair 2024](https://datascience.columbia.edu/events/undergraduate-research-fair-2024/) (P14).
 Poster: [`poster.pdf`](poster.pdf).
 
